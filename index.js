@@ -61,8 +61,9 @@ const displayQuiz = (data) => {
 
   
   data.forEach((quiz, i) => {
+    console.log(quiz.question);
     
-    quizContainer.innerHTML = 
+    quizContainer.innerHTML += 
     `<div class="m-3 py-3 px-4 shadow-sm rounded">
         <div class="flex items-center">
           <div class="h-8 w-8 bg-green-300 rounded-full flex justify-center items-center text-green-800 mr-3">
@@ -80,26 +81,26 @@ const displayQuiz = (data) => {
 
 // EventListener for quiz submit button
 document.querySelector("#submit").addEventlistener("click", () => {
-  if (answers.length < 6) {
-    return;
-  }
-  quizTimer(true);
-  answersContainer.innerHTML = `<div class="my-4">
-  <i class="fa-solid fa-fan animate-spin text-2xl text-green-600"></i>
-  <p class="text-xs animate-pulse">Please Wait, We are checking...</p>
-</div>`;
-  let timeTaken = document.querySelector("#count");
-  let totalMark = 0;
-  let grade = {
-    status: "",
-    color: "",
-  };
-
-  for (let ans of answers) {
-    if (ans.answer === ans.givenAns) {
-      totalMark += 10;
+    if (answers.length < 6) {
+      return;
     }
-  }
+    quizTimer(true);
+    answersContainer.innerHTML = `<div class="my-4">
+    <i class="fa-solid fa-fan animate-spin text-2xl text-green-600"></i>
+    <p class="text-xs animate-pulse">Please Wait, We are checking...</p>
+  </div>`;
+    let timeTaken = document.querySelector("#count");
+    let totalMark = 0;
+    let grade = {
+      status: "",
+      color: "",
+    };
+
+    for (let ans of answers) {
+      if (ans.answer === ans.givenAns) {
+        totalMark += 10;
+      }
+    }
 
   if (totalMark === 60) {
     grade.status = "Excellent";
